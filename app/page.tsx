@@ -334,6 +334,28 @@ function OverviewSection() {
         自然言語の指示でコードの生成・修正・リファクタリング・デバッグを行います。
       </p>
 
+      <h3 style={h3Style}>🤔 従来のAIツールと何が違うの？</h3>
+      <p style={pStyle}>
+        ChatGPTやCopilotなど既存のAIツールと比較すると、根本的な違いがあります。
+      </p>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, margin: "12px 0 20px", borderRadius: 12, overflow: "hidden", border: "1px solid #e2e8f0" }}>
+        <div style={{ padding: 14, background: "#f8fafc", borderBottom: "1px solid #e2e8f0", borderRight: "1px solid #e2e8f0", fontWeight: 700, fontSize: 13, color: "#64748b" }}>従来のAIツール</div>
+        <div style={{ padding: 14, background: "#faf5f0", borderBottom: "1px solid #e2e8f0", fontWeight: 700, fontSize: 13, color: "#c67a48" }}>Claude Code（エージェント型）</div>
+        <div style={{ padding: 12, borderBottom: "1px solid #e2e8f0", borderRight: "1px solid #e2e8f0", fontSize: 13, color: "#475569" }}>コードの<strong>断片</strong>を提案する（1行〜数行）</div>
+        <div style={{ padding: 12, borderBottom: "1px solid #e2e8f0", fontSize: 13, color: "#475569" }}><strong>プロジェクト全体</strong>を理解して複数ファイルを横断的に修正する</div>
+        <div style={{ padding: 12, borderBottom: "1px solid #e2e8f0", borderRight: "1px solid #e2e8f0", fontSize: 13, color: "#475569" }}>あなたが<strong>コピペ</strong>してコードに反映する</div>
+        <div style={{ padding: 12, borderBottom: "1px solid #e2e8f0", fontSize: 13, color: "#475569" }}><strong>自分でファイルを編集</strong>し、差分を見せてくれる</div>
+        <div style={{ padding: 12, borderBottom: "1px solid #e2e8f0", borderRight: "1px solid #e2e8f0", fontSize: 13, color: "#475569" }}>ターミナルの操作は<strong>自分でやる</strong></div>
+        <div style={{ padding: 12, borderBottom: "1px solid #e2e8f0", fontSize: 13, color: "#475569" }}>必要なら<strong>ターミナルコマンドも自分で実行</strong>する</div>
+        <div style={{ padding: 12, borderRight: "1px solid #e2e8f0", fontSize: 13, color: "#475569" }}>「相談相手」（あなたが手を動かす）</div>
+        <div style={{ padding: 12, fontSize: 13, color: "#475569" }}>「<strong>もう一人の開発者</strong>」（AIが手を動かす）</div>
+      </div>
+      <Tip type="info">
+        イメージとしては、ChatGPT = <strong>辞書を引く</strong>、Copilot = <strong>予測変換</strong>、
+        Claude Code = <strong>隣に座っているプログラマーに仕事を頼む</strong>感覚です。
+        指示を出せば、ファイルを開いて、コードを読んで、書き換えて、テストまで自分でやってくれます。
+      </Tip>
+
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, margin: "16px 0" }}>
         {[
           { icon: "🤖", title: "エージェント型", desc: "ファイルの読み書き・ターミナル実行を自律的に行う" },
@@ -377,6 +399,25 @@ function InstallSection() {
   return (
     <div>
       <h2 style={h2Style}>インストール手順</h2>
+
+      <h3 style={h3Style}>💡 まず知っておくこと：なぜ2つインストールするの？</h3>
+      <p style={pStyle}>
+        Claude Codeは<strong>「CLI（コマンドラインツール）」</strong>と<strong>「VS Code拡張」</strong>の
+        2つで構成されています。なぜ2つに分かれているかというと：
+      </p>
+      <div style={{ margin: "12px 0 20px", padding: 16, borderRadius: 12, background: "linear-gradient(135deg,#eff6ff,#f0fdf4)", border: "1px solid #93c5fd" }}>
+        <div style={{ fontSize: 13, lineHeight: 1.8, color: "#374151" }}>
+          <strong>CLI = 頭脳（AIの本体）</strong><br />
+          → ファイルを読む、コードを考える、ターミナルを実行する…すべての作業はCLIが行います<br /><br />
+          <strong>VS Code拡張 = 目と手（操作画面）</strong><br />
+          → CLIの作業結果を「差分表示」で見せたり、ファイルをワンクリックで開いたり、
+          IDE（開発環境）ならではの便利なUIを提供します
+        </div>
+      </div>
+      <Tip type="info">
+        つまりVS Code拡張は<strong>「CLIを便利に使うためのリモコン」</strong>のようなものです。
+        リモコン（拡張）がなくてもテレビ（CLI）は動きますが、セットで使うのが圧倒的に便利です。
+      </Tip>
 
       <h3 style={h3Style}>Step 1：前提条件を確認</h3>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8, margin: "8px 0 16px" }}>
@@ -444,6 +485,31 @@ function UISection() {
   return (
     <div>
       <h2 style={h2Style}>UI解説：画面の見方</h2>
+
+      <h3 style={h3Style}>🤔 なぜUIの理解が重要なの？</h3>
+      <p style={pStyle}>
+        Claude Codeは<strong>あなたのファイルを直接編集する</strong>AIです。
+        普通のチャットAIと違い、「回答をコピペする」のではなく、
+        AIが勝手にコードを書き換えます。だからこそ：
+      </p>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, margin: "12px 0 20px" }}>
+        {[
+          { icon: "👁️", title: "変更を確認する手段", desc: "Diff表示で「何が変わったか」を必ず見える化する" },
+          { icon: "🛑", title: "止める手段", desc: "間違った方向に進んだら即座に中断・巻き戻しできる" },
+          { icon: "🎛️", title: "調整する手段", desc: "AIの思考の深さや動作モードを状況に合わせて変える" },
+        ].map((item) => (
+          <div key={item.title} style={{ padding: 12, borderRadius: 10, background: "#eff6ff", border: "1px solid #bfdbfe", textAlign: "center" }}>
+            <div style={{ fontSize: 22, marginBottom: 4 }}>{item.icon}</div>
+            <div style={{ fontWeight: 700, fontSize: 12, color: "#1e40af", marginBottom: 4 }}>{item.title}</div>
+            <div style={{ fontSize: 11, color: "#475569", lineHeight: 1.5 }}>{item.desc}</div>
+          </div>
+        ))}
+      </div>
+      <Tip type="warn">
+        <strong>「自分のコードを他人が触る」のと同じ感覚</strong>を持ちましょう。
+        プルリクエストのレビューと同じで、変更内容を確認してからAcceptするのが基本です。
+      </Tip>
+
       <p style={pStyle}>
         以下は VS Code拡張のアクションパレット（コマンドメニュー）の各項目です。
         入力欄で<code>/</code>を打つか、パレットを開くと表示されます。
@@ -496,6 +562,12 @@ function UISection() {
         description="Extended Thinking（拡張思考）のON/OFF。ONにするとClaudeが段階的に思考プロセスを展開し、複雑な問題により正確に対応します。トグルスイッチで切り替え。"
         color="#2563eb"
       />
+      <Tip type="info">
+        <strong>EffortとThinkingの体感的な違い：</strong><br />
+        <strong>Low Effort</strong> = 「この変数名、何だっけ？」→ 即答。考えるまでもない質問向き<br />
+        <strong>High Effort + Thinking ON</strong> = 「このアプリの認証を完全にリファクタしたい」→ じっくり設計してから実装。時間はかかるが精度が高い<br />
+        迷ったら<strong>デフォルト（Medium）のまま</strong>でOK。必要に応じて上げ下げしましょう。
+      </Tip>
       <UIAnnotation
         label="Account & usage..."
         description="アカウント情報とレート制限の状態を確認。使用量の確認、残りのクォータ、プラン情報が表示されます。"
@@ -586,6 +658,25 @@ function CommandsSection() {
   return (
     <div>
       <h2 style={h2Style}>スラッシュコマンド一覧</h2>
+
+      <h3 style={h3Style}>🤔 そもそも「コンテキスト」って何？</h3>
+      <p style={pStyle}>
+        Claude Codeとの会話は、すべて<strong>「コンテキストウィンドウ」</strong>という
+        一定サイズの記憶領域に収まっている必要があります。
+      </p>
+      <div style={{ margin: "12px 0 16px", padding: 16, borderRadius: 12, background: "linear-gradient(135deg,#fef3c7,#fff7ed)", border: "1px solid #fcd34d" }}>
+        <div style={{ fontSize: 13, lineHeight: 1.8, color: "#374151" }}>
+          <strong>📦 コンテキスト = AIの「作業机」</strong><br />
+          机の広さには限りがあります（約200Kトークン）。会話が長くなると、
+          古い情報から机の上に乗らなくなります。すると：<br />
+          ・さっき話した内容を<strong>忘れる</strong><br />
+          ・最初に伝えたルールを<strong>無視する</strong><br />
+          ・同じ質問を<strong>繰り返してくる</strong><br /><br />
+          だから<code>/compact</code>（要約して圧縮）や<code>/clear</code>（机をきれいにする）で
+          コンテキストを管理する必要があるのです。
+        </div>
+      </div>
+
       <p style={pStyle}>
         入力欄で<code>/</code>を打つとコマンド一覧が表示されます。
         60以上のコマンドがありますが、ここでは最重要なものを紹介します。
@@ -621,6 +712,19 @@ function ShortcutsSection() {
   return (
     <div>
       <h2 style={h2Style}>キーボードショートカット</h2>
+
+      <h3 style={h3Style}>🤔 なぜ「巻き戻し」が最重要ショートカットなの？</h3>
+      <div style={{ margin: "12px 0 20px", padding: 16, borderRadius: 12, background: "linear-gradient(135deg,#fef2f2,#fff1f2)", border: "1px solid #fca5a5" }}>
+        <div style={{ fontSize: 13, lineHeight: 1.8, color: "#374151" }}>
+          <strong>⚠️ AIは間違えます。これは前提です。</strong><br /><br />
+          Claude Codeがいくら優秀でも、100%正しいコードを書くわけではありません。
+          時には的外れな修正をしたり、既存のコードを壊したりします。<br /><br />
+          だからこそ<strong>「元に戻す手段」</strong>が最も大切です。
+          Esc×2回のRewindは、コードの変更も会話の流れも巻き戻せる<strong>タイムマシン</strong>のようなもの。
+          「失敗しても大丈夫」という安心感があるからこそ、積極的にAIに仕事を任せられます。
+        </div>
+      </div>
+
       {cats.map((cat) => (
         <div key={cat} style={{ marginBottom: 20 }}>
           <Tag color={catColors[cat]}>{cat}</Tag>
@@ -708,6 +812,20 @@ function WorkflowSection() {
   return (
     <div>
       <h2 style={h2Style}>実践ワークフロー</h2>
+
+      <h3 style={h3Style}>🤔 なぜ「計画を立てる」がワークフローの中心なの？</h3>
+      <div style={{ margin: "12px 0 20px", padding: 16, borderRadius: 12, background: "linear-gradient(135deg,#f0fdf4,#ecfdf5)", border: "1px solid #86efac" }}>
+        <div style={{ fontSize: 13, lineHeight: 1.8, color: "#374151" }}>
+          AIに「認証機能を作って」とだけ言うと、AIは<strong>自分の判断で設計を決めてしまいます</strong>。
+          その結果、あなたが想定していたのと違うライブラリを選んだり、違う構造で実装したりします。<br /><br />
+          <strong>Plan Mode</strong>を使うと、AIはまず<strong>「こう実装しようと思いますが、いいですか？」</strong>
+          と計画を提示してくれます。コードを書く前に方向性を確認できるので、
+          大きな手戻りを防げます。<br /><br />
+          人間のチームでも同じですよね — いきなりコードを書き始めるより、
+          まず設計をレビューしてから着手する方が安全です。
+        </div>
+      </div>
+
       <p style={pStyle}>
         効率的に Claude Code を使うための推奨ワークフローです。
       </p>
@@ -761,11 +879,33 @@ function AdvancedSection() {
     <div>
       <h2 style={h2Style}>上級機能</h2>
 
+      <h3 style={h3Style}>🤔 上級機能はなぜ必要？</h3>
+      <p style={pStyle}>
+        基本機能だけでも十分使えますが、使い込むうちに以下の「壁」にぶつかります：
+      </p>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, margin: "12px 0 20px" }}>
+        {[
+          { wall: "毎回同じルールを伝えるのが面倒", solution: "→ CLAUDE.md で自動化" },
+          { wall: "GitHubやDBの情報も参照させたい", solution: "→ MCP で外部ツール接続" },
+          { wall: "編集後に毎回フォーマットを手動実行", solution: "→ Hooks で自動実行" },
+          { wall: "よく使うワークフローを再利用したい", solution: "→ Skills でテンプレート化" },
+        ].map((item) => (
+          <div key={item.wall} style={{ padding: 12, borderRadius: 10, background: "#faf5f0", border: "1px solid #e8d5c4" }}>
+            <div style={{ fontSize: 12, color: "#991b1b", fontWeight: 600, marginBottom: 4 }}>😫 {item.wall}</div>
+            <div style={{ fontSize: 12, color: "#166534", fontWeight: 700 }}>{item.solution}</div>
+          </div>
+        ))}
+      </div>
+
       <h3 style={h3Style}>🔌 MCP（Model Context Protocol）</h3>
       <p style={pStyle}>
         MCPは「AIのUSB-C」と呼ばれる標準プロトコル。
         外部ツール（GitHub, DB, Slack等）をClaudeに接続できます。
       </p>
+      <Tip type="info">
+        <strong>MCPがないと：</strong>「このGitHub Issueを見て修正して」→ 自分でIssueを開いて、内容をコピーして、貼り付ける必要がある<br />
+        <strong>MCPがあると：</strong>「Issue #42を見て修正して」→ ClaudeがGitHubに直接アクセスして内容を読み、修正コードまで生成
+      </Tip>
       <CodeBlock title=".mcp.json（プロジェクトルート）">
         {`{
   "servers": {
@@ -823,6 +963,13 @@ description: デプロイ前のチェックリストを実行
         <strong>CLAUDE.md</strong>はプロジェクトルートに置く設定ファイル。
         毎回の会話でClaudeが自動的に読み込みます（200行以下推奨）。
       </p>
+      <Tip type="info">
+        <strong>CLAUDE.mdがないとどうなる？</strong><br />
+        Claudeは毎回「まっさらな状態」で会話を始めます。
+        「TypeScriptで書いて」「テストはvitestで」「コメントは日本語で」と
+        毎回言わなければなりません。CLAUDE.mdに書いておけば<strong>自動的にルールが適用</strong>されます。
+        いわば<strong>「チームの新メンバーに渡すオンボーディング資料」</strong>のようなものです。
+      </Tip>
       <p style={pStyle}>
         <strong>.claudeignore</strong>は.gitignoreと同様に、
         Claudeに読ませたくないファイル（.env, lockファイル等）を指定します。
